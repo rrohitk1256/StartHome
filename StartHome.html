@@ -1,1 +1,102 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start</title>
+  <style>
+    :root {
+      --bg-light: #f5f5f5;
+      --bg-dark: #1e1e1e;
+      --text-light: #000;
+      --text-dark: #fff;
+      --accent: #4e9af1;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+    .dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    .time {
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+    .search {
+      margin: 1em 0;
+    }
+    input[type="text"] {
+      padding: 0.5em;
+      width: 80vw;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+    .links {
+      display: flex;
+      gap: 1em;
+      margin-top: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .toggle {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle" onclick="toggleMode()">🌓</div>
+  <div class="time" id="time"></div>
+  <div class="search">
+    <form onsubmit="search(event)">
+      <input type="text" id="query" placeholder="Search Google Baba..." />
+    </form>
+  </div>
+  <div class="links">
+    <a href="https://youtube.com">YouTube</a>
+    <a href="https://reddit.com">Reddit</a>
+    <a href="https://github.com">GitHub</a>
+    <a href="https://chat.openai.com">ChatGPT</a>
+  </div>  <script>
+    function updateTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const mins = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById("time").innerText = `${hours}:${mins}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
 
+    function search(event) {
+      event.preventDefault();
+      const query = document.getElementById("query").value;
+      if (query) {
+        window.location.href = `https://google.com/?q=${encodeURIComponent(query)}`;
+      }
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script></body>
+</html>
